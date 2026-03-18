@@ -21,7 +21,7 @@
             min-height: 100vh;
         }
 
-        /* Efeito de Chuva */
+        /* Efeito de Chuva INTENSO */
         .rain {
             position: fixed;
             top: 0;
@@ -30,19 +30,31 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            background-image: 
-                linear-gradient(transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
-            background-size: 2px 100px;
-            animation: chuva 1s linear infinite;
-            opacity: 0.3;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255,255,255,0.03) 2px,
+                    rgba(255,255,255,0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255,255,255,0.15) 10px,
+                    rgba(255,255,255,0.15) 12px
+                );
+            animation: chuvaIntensa 0.4s linear infinite;
+            opacity: 0.6;
         }
 
-        @keyframes chuva {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 500px; }
+        @keyframes chuvaIntensa {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 0 0, 0 300px; }
         }
 
-        /* Efeito de Raio */
+        /* Efeito de Raio MAIS FORTE */
         .lightning {
             position: fixed;
             top: 0;
@@ -52,13 +64,13 @@
             pointer-events: none;
             z-index: 2;
             opacity: 0;
-            background: radial-gradient(ellipse at 50% 20%, rgba(255,255,255,0.8), transparent);
-            animation: relampear 8s infinite;
+            background: radial-gradient(ellipse at 50% 20%, rgba(255,255,255,0.9), transparent 40%);
+            animation: relampear 6s infinite;
         }
 
         @keyframes relampear {
-            0%, 94%, 96%, 100% { opacity: 0; }
-            95% { opacity: 0.7; }
+            0%, 90%, 92%, 94%, 100% { opacity: 0; }
+            91%, 93% { opacity: 0.8; }
         }
 
         /* Container Principal */
@@ -102,42 +114,46 @@
             50% { transform: scale(1.02); }
         }
 
-        /* Livro 3D Girando */
+        /* Livro 3D GIRANDO COMPLETO */
         .book-container {
-            perspective: 1500px;
+            perspective: 2000px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 50px 0;
-            min-height: 400px;
+            min-height: 450px;
         }
 
         .book-3d {
             width: 320px;
             height: auto;
             transform-style: preserve-3d;
-            animation: girarFlutuar 8s ease-in-out infinite;
-            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.7));
+            animation: girar360Completo 10s ease-in-out infinite;
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
             transition: transform 0.3s ease;
         }
 
         .book-3d:hover {
             animation-play-state: paused;
-            transform: scale(1.1) rotateY(20deg) translateY(-20px);
+            transform: scale(1.15) rotateY(25deg) translateZ(50px);
         }
 
-        @keyframes girarFlutuar {
-            0%, 100% { 
-                transform: rotateY(-8deg) rotateX(5deg) translateY(0); 
+        /* ANIMAÇÃO COMPLETA: Gira 360° + Flutua */
+        @keyframes girar360Completo {
+            0% { 
+                transform: rotateY(0deg) rotateX(5deg) translateY(0) translateZ(0); 
             }
             25% { 
-                transform: rotateY(8deg) rotateX(-3deg) translateY(-15px); 
+                transform: rotateY(90deg) rotateX(-3deg) translateY(-20px) translateZ(20px); 
             }
             50% { 
-                transform: rotateY(-5deg) rotateX(4deg) translateY(-25px); 
+                transform: rotateY(180deg) rotateX(4deg) translateY(-30px) translateZ(0); 
             }
             75% { 
-                transform: rotateY(10deg) rotateX(-2deg) translateY(-15px); 
+                transform: rotateY(270deg) rotateX(-2deg) translateY(-20px) translateZ(-20px); 
+            }
+            100% { 
+                transform: rotateY(360deg) rotateX(5deg) translateY(0) translateZ(0); 
             }
         }
 
@@ -349,7 +365,7 @@
         <!-- Título -->
         <h1 class="hero-title">🧠 VENÇA A ANSIEDADE<br>EM 15 PASSOS</h1>
 
-        <!-- Livro 3D Girando -->
+        <!-- Livro 3D Girando 360° -->
         <div class="book-container">
             <img src="https://raw.githubusercontent.com/Ripmastersid/landing-ansiedade/main/Livro%203d.png" 
                  alt="Ebook 15 Passos para Vencer a Ansiedade" 
@@ -420,4 +436,3 @@
     </div>
 </body>
 </html>
-
